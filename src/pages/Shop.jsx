@@ -25,6 +25,7 @@ export default function Shop() {
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: ['products'],
+    // @ts-ignore
     queryFn: () => base44.entities.Product.list('-created_date', 50),
   });
 
