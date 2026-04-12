@@ -129,6 +129,7 @@ export default function BathroomQuiz() {
 
   const { data: products = [] } = useQuery({
     queryKey: ['products'],
+    // @ts-ignore
     queryFn: () => base44.entities.Product.list('-created_date', 50),
   });
 
