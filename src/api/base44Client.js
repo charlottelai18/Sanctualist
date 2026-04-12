@@ -1,15 +1,29 @@
-// @ts-nocheck
-import { createClient } from '@base44/sdk';
-import { appParams } from '@/lib/app-params';
+// Shopify Storefront API client
+const SHOPIFY_STORE_DOMAIN = 'sanctualist.myshopify.com';
+const SHOPIFY_STOREFRONT_ACCESS_TOKEN = 'YOUR_TOKEN_HERE';
 
-const { appId, token, functionsVersion, appBaseUrl } = appParams;
+export async function shopifyFetch(query) {
+  const response = await fetch(
+    `https://${SHOPIFY_STORE_DOMAIN}/api/2024-01/graphql.json`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+      },
+      body: JSON.stringify({ query }),
+    }
+  );
+  return response.json();
+}
 
-//Create a client with authentication required
-export const base44 = createClient({
-  appId,
-  token,
-  functionsVersion,
-  serverUrl: '',
-  requiresAuth: false,
-  appBaseUrl
-});
+export const base44 = {
+  entities: {
+    Product: {
+      list: async () => [],
+    },
+    Order: {
+      list: async () => [],
+    },
+  },
+};
